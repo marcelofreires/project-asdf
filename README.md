@@ -13,8 +13,6 @@ yarn install project-asdf
 ```jsx
 import { Button } from "project-asdf";
 
-// ...
-
 const MyComponent = () => (
   <Button label="Press me" onPress={() => console.log('Pressed')} />
 );
