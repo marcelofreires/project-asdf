@@ -13,6 +13,7 @@ export default function App() {
         <Button
           label="Increase the conter"
           onPress={() => setCount((prevState) => prevState + 1)}
+          backgroundColor="#560bad"
         />
       </View>
     </View>

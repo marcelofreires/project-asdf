@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 20,
-    backgroundColor: '#4169e1',
     borderRadius: 8,
   },
   label: {

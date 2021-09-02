@@ -1,7 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-import { DEFAULT_ACTIVE_OPACITY } from '../../constants';
+import {
+  DEFAULT_ACTIVE_OPACITY,
+  DEFAULT_BACKGROUND_COLOR,
+} from '../../constants';
 import { styles } from './styles';
 
 interface ButtonProps {
@@ -18,6 +21,10 @@ interface ButtonProps {
    * Defaults to 0.6
    */
   activeOpacity?: number;
+  /**
+   * Define background color for the button
+   */
+  backgroundColor?: string;
 }
 
 /**
@@ -38,9 +45,15 @@ export const Button = ({
   label,
   onPress,
   activeOpacity = DEFAULT_ACTIVE_OPACITY,
+  backgroundColor = DEFAULT_BACKGROUND_COLOR,
 }: ButtonProps) => (
   <TouchableOpacity
-    style={styles.container}
+    style={[
+      styles.container,
+      {
+        backgroundColor,
+      },
+    ]}
     onPress={onPress}
     activeOpacity={activeOpacity}
   >
