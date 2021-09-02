@@ -5,17 +5,21 @@ A component library example for React Native
 ## Installation
 
 ```sh
-npm install project-asdf
+yarn install project-asdf
 ```
 
 ## Usage
 
-```js
-import ProjectAsdf from "project-asdf";
+```jsx
+import { Button } from "project-asdf";
 
 // ...
 
-const result = await ProjectAsdf.multiply(3, 7);
+const MyComponent = () => (
+  <Button label="Press me" onPress={() => console.log('Pressed')} />
+);
+
+export default MyComponent;
 ```
 
 ## Contributing
