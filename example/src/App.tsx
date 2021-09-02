@@ -1,18 +1,20 @@
 import * as React from 'react';
+import { Button } from 'project-asdf';
 
 import { StyleSheet, View, Text } from 'react-native';
-import ProjectAsdf from 'project-asdf';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ProjectAsdf.multiply(3, 7).then(setResult);
-  }, []);
+  const [count, setCount] = React.useState<number>(0);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Counter: {count}</Text>
+      <View style={styles.box}>
+        <Button
+          label="Increase the conter"
+          onPress={() => setCount((prevState) => prevState + 1)}
+        />
+      </View>
     </View>
   );
 }
@@ -24,8 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: 60,
-    height: 60,
     marginVertical: 20,
   },
 });
