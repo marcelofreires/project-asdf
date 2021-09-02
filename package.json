@@ -1,6 +1,6 @@
 {
   "name": "project-asdf",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A component library example for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
