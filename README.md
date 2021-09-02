@@ -5,7 +5,7 @@ A component library example for React Native
 ## Installation
 
 ```sh
-yarn install project-asdf
+yarn add project-asdf
 ```
 
 ## Usage
