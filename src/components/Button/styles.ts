@@ -12,4 +12,7 @@ export const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
   },
+  disabled: {
+    backgroundColor: '#999',
+  },
 });

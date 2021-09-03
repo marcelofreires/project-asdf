@@ -1,11 +1,26 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import {
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+  LayoutChangeEvent,
+} from 'react-native';
 
 import {
   DEFAULT_ACTIVE_OPACITY,
   DEFAULT_BACKGROUND_COLOR,
+  MOTION_DURATION,
 } from '../../constants';
 import { styles } from './styles';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 interface ButtonProps {
   /**
@@ -25,6 +40,14 @@ interface ButtonProps {
    * Define background color for the button
    */
   backgroundColor?: string;
+  /**
+   * Show a loading indicator
+   */
+  loading?: boolean;
+  /**
+   * A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -46,17 +69,50 @@ export const Button = ({
   onPress,
   activeOpacity = DEFAULT_ACTIVE_OPACITY,
   backgroundColor = DEFAULT_BACKGROUND_COLOR,
-}: ButtonProps) => (
-  <TouchableOpacity
-    style={[
-      styles.container,
-      {
-        backgroundColor,
-      },
-    ]}
-    onPress={onPress}
-    activeOpacity={activeOpacity}
-  >
-    <Text style={styles.label}>{label}</Text>
-  </TouchableOpacity>
-);
+  loading,
+  disabled,
+}: ButtonProps) => {
+  const [minWidth, setMinWidth] = useState<number>(0);
+
+  const handleOnPress = () => {
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        MOTION_DURATION,
+        LayoutAnimation.Types.easeInEaseOut,
+        LayoutAnimation.Properties.scaleXY
+      )
+    );
+    onPress();
+  };
+
+  const handleOnLayout = ({
+    nativeEvent: {
+      layout: { width },
+    },
+  }: LayoutChangeEvent) => setMinWidth(width);
+
+  return (
+    <TouchableOpacity
+      style={[
+        {
+          minWidth: minWidth,
+        },
+        styles.container,
+        {
+          backgroundColor,
+        },
+        disabled && styles.disabled,
+      ]}
+      onPress={handleOnPress}
+      activeOpacity={activeOpacity}
+      disabled={disabled}
+      onLayout={handleOnLayout}
+    >
+      {loading ? (
+        <ActivityIndicator size="small" color="#fff" />
+      ) : (
+        <Text style={styles.label}>{label}</Text>
+      )}
+    </TouchableOpacity>
+  );
+};

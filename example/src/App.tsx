@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { Button } from 'project-asdf';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function App() {
-  const [count, setCount] = React.useState<number>(0);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handlePress = () => {
+    setLoading((prevState) => !prevState);
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Counter: {count}</Text>
       <View style={styles.box}>
         <Button
           label="Increase the conter"
-          onPress={() => setCount((prevState) => prevState + 1)}
+          onPress={handlePress}
           backgroundColor="#560bad"
+          loading={loading}
         />
       </View>
     </View>
